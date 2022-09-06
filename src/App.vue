@@ -61,7 +61,7 @@
 import { Octokit } from '@octokit/core'
 
 import {
-  reactive, watch, ref, Ref
+  reactive, watch, ref
 } from 'vue'
 
 import SearchInputVue from './components/SearchInput.vue'
@@ -73,7 +73,7 @@ import type { Repository, SearchReposParameters } from './type/repository'
 const auth = import.meta.env.VITE_GITHUB_AUTH
 const octokit = new Octokit({ auth })
 
-const parameters: SearchReposParameters = reactive({
+const parameters = reactive<SearchReposParameters>({
   q: '',
   sort: 'stars',
   order: 'desc',
@@ -92,7 +92,7 @@ const updatePage = (val: number) => {
 const loading = ref(false)
 const searchReposFailed = ref(false)
 
-const repositories: Ref<Repository[]> = ref([])
+const repositories = ref<Repository[]>([])
 const maxPaginationNumber = ref(0)
 
 watch(parameters, async () => {
